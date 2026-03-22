@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brugeroversigt</title>
+</head>
+<body>
+
+<h1>Velkommen til bruger oversigten</h1>
+
+<h3>Registrerede brugere:</h3>
+
+<ul th:if="${users != null and !#lists.isEmpty(users)}">
+    <li th:each="u : ${users}">
+        <strong th:text="${u.username}">Brugernavn</strong>
+        <span th:text="${u.email}">email</span>
+    </li>
+</ul>
+
+<p th:if="${users == null or #lists.isEmpty(users)}">
+    Der er ingen registrerede brugere endnu.
+</p>
+
+</body>
+</html>

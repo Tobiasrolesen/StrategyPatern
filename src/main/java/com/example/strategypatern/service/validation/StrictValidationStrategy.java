@@ -1,23 +1,33 @@
 package com.example.strategypatern.service.validation;
 
+import com.example.strategypatern.model.User;
+import org.springframework.stereotype.Component;
+
+@Component
 public class StrictValidationStrategy implements ValidationStrategy{
+
     @Override
-    public String validate(String fname, String password, String email) {
-        if (fname == null || fname.length() < 6 || fname.contains(" ")) {
-            throw new ValidationException("Username needs to be at least 6 characters long and cannot have space between.");
+    public void validate(User user) {
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        if (username == null || username.length() < 6 || username.contains(" ")){
+            throw new ValidationException ("Username must be at least 6 characters long and contain no spaces");
         }
 
-        if (password == null || password.length() < 10 && !password.contains("[a-zA-Z]+") && !password.contains("[0-9]+")) {
-            throw new ValidationException("Password needs to be at least 10 characters long and include both letters and numbers, and at least 1 capital letter");
+        if (password == null || password.length() < 10) {
+            throw new ValidationException("Password must contain at least 10 characters");
+        }
+        if (!password.matches(".*[A-Za-z].*")) {
+            throw new ValidationException("Password must include at least 1 letter");
+        }
+        if (!password.matches(".*\\d.*")) {
+            throw new ValidationException("Password must include at least 1 number");
         }
 
-        // Regex betyder ^[^@] at den ikke må starte med et @
-        // +@[^@] betyder at der skal komme et @ men der må ikke være et efterfølgende
-        // +.[^@]+ betyder at der skal komme et. og at der ikke må være et @ efter, der skal dog være andet tekst efter.
-        if (email == null || email.contains("^[^@]+@[^@]+.[^@]+")) {
-            throw new ValidationException("Email must contain @ and .");
+        if (email == null || !email.matches("^[^@]+@[^@]+\\.[^@]+$")) {
+            throw new ValidationException("Email needs to be in a legal format");
         }
-
-        return null;
     }
 }

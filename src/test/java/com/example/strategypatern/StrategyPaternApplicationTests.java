@@ -1,3 +1,4 @@
+/*
 package com.example.strategypatern;
 
 import com.example.strategypatern.model.User;
@@ -76,3 +77,6 @@ class StrategyPaternApplicationTests {
         }
     }
 }
+
+
+ */

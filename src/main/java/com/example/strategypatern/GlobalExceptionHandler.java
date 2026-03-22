@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public String handleValidation(ValidationException ex, Model model) {
         model.addAttribute("message", ex.getMessage());
-        return "error";
+        return "register";
     }
 
     @ExceptionHandler(Exception.class)

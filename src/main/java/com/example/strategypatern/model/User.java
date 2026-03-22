@@ -1,18 +1,23 @@
 package com.example.strategypatern.model;
 
+import com.example.strategypatern.service.validation.ValidationMode;
+
 public class User {
-    private String fname;
+    private String username;
     private String password;
     private String email;
 
-    public User(String fname, String password, String email){
-        this.fname = fname;
+    public User(String fname, String password, String email) {
+        this.username = fname;
         this.password = password;
         this.email = email;
     }
 
-    public String getFname(){
-        return fname;
+    public User() {
+    }
+
+    public String getUsername(){
+        return username;
     }
 
     public String getPassword(){
@@ -23,8 +28,8 @@ public class User {
         return email;
     }
 
-    public void setFname(String fname){
-        this.fname = fname;
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public void setPassword(String password){

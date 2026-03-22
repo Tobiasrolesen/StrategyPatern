@@ -1,10 +1,18 @@
 package com.example.strategypatern.service.validation;
 
-public class SimpleValidationStrategy implements ValidationStrategy{
-    @Override
-    public String validate(String fname, String password, String email) {
+import com.example.strategypatern.model.User;
+import org.springframework.stereotype.Component;
 
-        if (fname == null || fname.length() < 3){
+@Component
+public class SimpleValidationStrategy implements ValidationStrategy{
+
+    @Override
+    public void validate(User user) {
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        if (username == null || username.length() < 3){
             throw new ValidationException("Username needs to be longer than 3 characters");
         }
 
@@ -15,7 +23,6 @@ public class SimpleValidationStrategy implements ValidationStrategy{
         if (email == null || !email.contains("@") || !email.contains(".")){
             throw new ValidationException ("Email must contain @ and .");
         }
-        return null;
     }
 }
 

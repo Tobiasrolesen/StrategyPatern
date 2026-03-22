@@ -1,5 +1,7 @@
 package com.example.strategypatern.service.validation;
 
+import com.example.strategypatern.model.User;
+
 public interface ValidationStrategy {
-    String validate(String fname, String password, String email);
+    void validate(User user);
 }
